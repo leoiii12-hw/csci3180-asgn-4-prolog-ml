@@ -1,8 +1,9 @@
 task(t1, 2, 4).
 task(t2, 4, 6).
-task(t3, 7, 8).
-task(t4, 9, 10).
-task(t5, 10, 12).
+task(t3, 3, 7).
+task(t4, 8, 9).
+task(t5, 1, 10).
+task(t6, 10, 1).
 
 %
 %
@@ -41,13 +42,13 @@ compatible_pair([Task1,Task2]) :-
 %
 %
 % compatible_list([t1,t2,t3,t4,t5]).
+% TODO: compatible_list([t6]).
 compatible_list(Tasks) :-
     pairs(Tasks,Pairs),
     check_compatible_in_list(Pairs).
 
 check_compatible_in_list([]).
 check_compatible_in_list([Pair|RestPairs]) :-
-    print(Pair),
     compatible_pair(Pair),
     check_compatible_in_list(RestPairs).
 
