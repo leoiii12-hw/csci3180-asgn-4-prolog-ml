@@ -27,7 +27,7 @@ gt(s(_),0).
 gt(s(X),s(Y)) :- gt(X,Y).
 
 % 1c
-% uint_num(X), (X == s(s(s(0))) -> !; writeln(X)), false.
+% uint_num(X), (X == s(s(s(0))) -> !; write(X), write('\n')), false.
 
 % 1d
 sum(0,Result,Result).
@@ -42,7 +42,7 @@ product(s(X),Y,Result) :- % X * Y = (X - 1) * Y + Y
 % product(s(s(0)),s(s(s(0))),Product).
 
 % 1f
-% product(X,s(s(s(s(0)))),s(s(s(s(s(s(s(s(0))))))))).
+% product(X,s(s(s(s(0)))),s(s(s(s(s(s(s(s(0))))))))),!.
 
 % 2a
 nth(0,[MatchedElement|_],MatchedElement) :- !.

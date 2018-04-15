@@ -64,7 +64,7 @@
 (* 2c *)
 fun mul(x : int, y : int) = x * y
 fun add(x : int, y : int) = x + y
-fun uncurry f(x : int, y : int) = mul(x, add(y, 3))
+fun f x y = mul(x, add(y, 3))
 
 (* 
 
