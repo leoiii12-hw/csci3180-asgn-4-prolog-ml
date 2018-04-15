@@ -1,8 +1,4 @@
 % Assume the set of natural numbers consists of zero
-%
-% format_as_successor(2,X),format_as_successor(3,Y),product(X,Y,Product).
-% format_as_successor(0,0).
-% format_as_successor(Number,s(Result)) :- NewNumber is Number - 1, format_as_successor(NewNumber,Result).
 
 % 1a
 uint_num(0).
