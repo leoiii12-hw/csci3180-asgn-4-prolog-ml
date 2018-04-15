@@ -5,10 +5,11 @@ val tasks = [
   ("t3", 3, 7),
   ("t4", 8, 9),
   ("t5", 1, 10),
-  ("t6", 10, 1)
+  ("t6", 10, 1),
+  ("t7", 1, 1)
 ] : (string * int * int) list;
 
-fun internal_check_task(task : (string * int * int)) = #2 task < #3 task;
+fun internal_check_task(task : (string * int * int)) = #2 task <= #3 task;
 
 (*
   check_task("t1", tasks);
