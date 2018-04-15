@@ -53,7 +53,6 @@ fun get_pairs(elements : string list) =
   compatible_list(["t1", "t2", "t4"], tasks);
   compatible_list(["t1", "t2", "t3", "t4", "t5"], tasks);
   compatible_list(["t3", "t4"], tasks);
-  TODO: compatible_list(["t6"], tasks);
  *)
 fun compatible_list(taskNames : string list, tasks : (string * int * int) list) =
     let val pairs = get_pairs(taskNames)
