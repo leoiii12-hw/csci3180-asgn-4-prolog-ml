@@ -24,41 +24,41 @@
 
 ***************************************************
 1a
-(\<lambda>c.c (\<lambda>a.\<lambda>b.b)) ((\<lambda>a.\<lambda>b.\<lambda>f.f a b) p q)
-    = (\<lambda>a.\<lambda>b.\<lambda>f.f a b) p q (\<lambda>a.\<lambda>b.b)            (\<beta>)
-    = (\<lambda>b.\<lambda>f.f p b) q (\<lambda>a.\<lambda>b.b)                 (\<beta>)
-    = (\<lambda>f.f p q) (\<lambda>a.\<lambda>b.b)                      (\<beta>)
-    = (\<lambda>a.\<lambda>b.b) p q                             (\<beta>)
-    = (\<lambda>b.b) q                                  (\<beta>)
-    = q                                         (\<delta>)
+(λc.c (λa.λb.b)) ((λa.λb.λf.f a b) p q)
+    = (λa.λb.λf.f a b) p q (λa.λb.b)            (β)
+    = (λb.λf.f p b) q (λa.λb.b)                 (β)
+    = (λf.f p q) (λa.λb.b)                      (β)
+    = (λa.λb.b) p q                             (β)
+    = (λb.b) q                                  (β)
+    = q                                         (δ)
 
 ***************************************************
 1b
-(\<lambda>c.c (\<lambda>a.\<lambda>b.b)) ((\<lambda>a.\<lambda>b.\<lambda>f.f a b) p q)
-    = (\<lambda>c.c (\<lambda>a.\<lambda>b.b)) ((\<lambda>b.\<lambda>f.f p b) q)        (\<beta>)
-    = (\<lambda>c.c (\<lambda>a.\<lambda>b.b)) (\<lambda>f.f p q)               (\<beta>)
-    = (\<lambda>a.\<lambda>b.b) (\<lambda>f.f p q)                      (\<beta>)
-    = (\<lambda>a.\<lambda>b.b) p q                             (\<beta>)
-    = (\<lambda>b.b) q                                  (\<beta>)
-    = q                                         (\<delta>)
+(λc.c (λa.λb.b)) ((λa.λb.λf.f a b) p q)
+    = (λc.c (λa.λb.b)) ((λb.λf.f p b) q)        (β)
+    = (λc.c (λa.λb.b)) (λf.f p q)               (β)
+    = (λa.λb.b) (λf.f p q)                      (β)
+    = (λa.λb.b) p q                             (β)
+    = (λb.b) q                                  (β)
+    = q                                         (δ)
 
 ***************************************************
 2a
-(\<lambda>x.\<lambda>y. (mul x ((\<lambda>x. (add x 3)) y))) 7 8
-    = (\<lambda>x.\<lambda>y. (mul x ((\<lambda>z. (add z 3)) y))) 7 8  (\<alpha>)
-    = (\<lambda>y. (mul 7 ((\<lambda>z. (add z 3)) y))) 8       (\<beta>)
-    = (mul 7 ((\<lambda>z. (add z 3))8))                (\<beta>)
-    = mul 7 (add 8 3)                           (\<beta>)
-    = 77                                        (\<delta>)
+(λx.λy. (mul x ((λx. (add x 3)) y))) 7 8
+    = (λx.λy. (mul x ((λz. (add z 3)) y))) 7 8  (\<alpha>)
+    = (λy. (mul 7 ((λz. (add z 3)) y))) 8       (β)
+    = (mul 7 ((λz. (add z 3))8))                (β)
+    = mul 7 (add 8 3)                           (β)
+    = 77                                        (δ)
 
 ***************************************************
 2b
-(\<lambda>x.\<lambda>y. (mul x ((\<lambda>x. (add x 3)) y))) 7 8
-    = (\<lambda>x.\<lambda>y. (mul x ((\<lambda>z. (add z 3)) y))) 7 8  (\<alpha>)
-    = (\<lambda>x.\<lambda>y. (mul x (add y 3))) 7 8            (\<beta>)
-    = (\<lambda>y. (mul 7 (add y 3)))                   (\<beta>)
-    = mul 7 (add 8 3)                           (\<beta>)
-    = 77                                        (\<delta>)
+(λx.λy. (mul x ((λx. (add x 3)) y))) 7 8
+    = (λx.λy. (mul x ((λz. (add z 3)) y))) 7 8  (\<alpha>)
+    = (λx.λy. (mul x (add y 3))) 7 8            (β)
+    = (λy. (mul 7 (add y 3)))                   (β)
+    = mul 7 (add 8 3)                           (β)
+    = 77                                        (δ)
  *)
 
 (* 2c *)
@@ -70,6 +70,8 @@ fun f x y = mul(x, add(y, 3))
 
 ***************************************************
 3a
+
+1.
 k
     = eval_normal(f1 m)
     = eval_normal((lambda x.(add x 1)) m)
@@ -81,8 +83,31 @@ k
 
 ∴ k = 2
 
-printf(k) should print the following without a new line.
-2
+printf(k) => 2
+
+2.
+(lambda g.g 5)(lambda x.(x + 3))
+    = (lambda x.(x + 3)) 5
+    = 5 + 3
+    = 8
+
+∴ m = 8
+
+printf(m) => 8
+
+3.
+After swap(k, m), k and m should be exchanged.
+
+printf(k) => 8
+
+4.
+loop(3, pi (u, v) w = u + 1; u = v + 1; v = w (k, m)); does not assign any value to k and m.
+
+printf(k, m) => 82
+
+Total.
+28882
+
 
 ***************************************************
 3b
