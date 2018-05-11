@@ -45,12 +45,40 @@ product(s(X),Y,Result) :- % X * Y = (X - 1) * Y + Y
 % product(X,s(s(s(s(0)))),s(s(s(s(s(s(s(s(0))))))))),!.
 
 % 2a
-nth(0,[MatchedElement|_],MatchedElement) :- !.
+% Retrieived from sicstus/3.12.7/lib/sicstus-3.12.7/library/lists.pl
+% nth(3,[1,2,3,4,3,3],X).
+% nth(X,[1,2,3,4,3,3],3).
+nth0v([Element|Tail], Element, Index, Index, Tail).
+nth0v([Head|Tail], Element, M, Index, [Head|Rest]) :-
+        N is M + 1,
+        nth0v(Tail, Element, N, Index, Rest).
 
-nth(Index,[_|RestElements],Element) :-
-    nonvar(Index),
-    NewIndex is Index - 1,
-    nth(NewIndex,RestElements,Element).
+nth0i(0, List, Head, Tail) :- !,
+        List = [Head|Tail].
+nth0i(N, [Head|Tail], Element, [Head|Rest]) :-
+        M is N - 1,
+        nth0i(M, Tail, Element, Rest).
+
+nth0v([Element|_], Element, Index, Index).
+nth0v([_|Tail], Element, M, Index) :-
+        N is M + 1,
+        nth0v(Tail, Element, N, Index).
+
+nth0i(0, List, Head) :- !,
+        List = [Head|_].
+nth0i(N, [_|Tail], Element) :-
+        M is N - 1,
+        nth0i(M, Tail, Element).
+
+nth(Element, List, N) :-
+        integer(N), !,
+        N >= 1,
+        N1 is N-1,
+        nth0i(N1, List, Element).
+nth(Element, List, N) :-
+        var(N),
+        nth0v(List, Element, 1, N).
 
 % 2b
-third(X,L) :- nth(2,L,X), !.
+% third(X,[1,2,7,4,3,3]).
+third(X,L) :- nth(X,L,3), !.

@@ -101,13 +101,16 @@ After swap(k, m), k and m should be exchanged.
 printf(k) => 8
 
 4.
-loop(3, pi (u, v) w = u + 1; u = v + 1; v = w (k, m)); does not assign any value to k and m.
+pi (u, v) {w = u + 1; u = v + 1; v = w} (k, m) is doing the same thing as swap(k + 1, m + 1).
+i = 0, k = 8 m = 2
+i = 1, k = 3 m = 9
+i = 2, k = 10 m = 4
+i = 3, k = 5 m = 11
 
-printf(k, m) => 82
+printf(k, m) => 511
 
 Total.
-28882
-
+288511
 
 ***************************************************
 3b
@@ -123,6 +126,8 @@ All printfs should have the same output.
 
 ***************************************************
 3c
+Assume Lapi needs declaration in order to use variables, because I see "int m = 1, n = 1, k".
+
 t is global static variable.
 t can be accessed, but it is not defined in the current program. t will be captured in the procedure.
 Therefore, it should have been defined in either lambda.h or pi.h, and t must be exposed as a global variable.
